@@ -16,6 +16,7 @@
 
 #if FRAMEWORK
 using System;
+using System.Linq;
 using System.Net;
 
 #if !MONOTOUCH && !MONODROID
@@ -173,16 +174,29 @@ namespace RestSharp
 
 		private void PreparePostData(HttpWebRequest webRequest)
 		{
-			if (HasFiles)
-			{
-				webRequest.ContentType = GetMultipartFormContentType();
-				using (var requestStream = webRequest.GetRequestStream())
-				{
-					WriteMultipartFormData(requestStream);
-				}
-			}
+         if (Files.Count > 1 || (Files.Count == 1 && (HasBody || Parameters.Any())))
+         {
+            webRequest.ContentType = GetMultipartFormContentType();
+            using (var requestStream = webRequest.GetRequestStream())
+            {
+               WriteMultipartFormData(requestStream);
+            }
 
-			PreparePostBody(webRequest);
+            PreparePostBody(webRequest);
+         }
+         else if (Files.Count == 1)
+         {
+            HttpFile singleFile = Files.Single();
+            webRequest.ContentType = singleFile.ContentType;
+            using (var requestStream = webRequest.GetRequestStream())
+            {
+               singleFile.Writer(requestStream);
+            }
+         }
+         else
+         {
+            PreparePostBody(webRequest);
+         }
 		}
 
 		private void WriteRequestBody(HttpWebRequest webRequest)

@@ -56,6 +56,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\RestSharp.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\MimecastServicesForExchange.MSE\trunk\src\mimecast.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -147,6 +153,9 @@
     <Compile Include="Serializers\XmlSerializer.cs" />
     <Compile Include="Http.Async.cs" />
     <Compile Include="RestClient.Sync.cs" />
+    <None Include="..\..\MimecastServicesForExchange.MSE\trunk\src\mimecast.snk">
+      <Link>mimecast.snk</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="T4Helper\T4Helper.tt">
       <LastGenOutput>T4Helper.log</LastGenOutput>

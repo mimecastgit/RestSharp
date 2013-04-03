@@ -40,6 +40,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\RestSharp.IntegrationTests.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\..\MimecastServicesForExchange.MSE\trunk\src\mimecast.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -78,6 +84,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\MimecastServicesForExchange.MSE\trunk\src\mimecast.snk">
+      <Link>mimecast.snk</Link>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
